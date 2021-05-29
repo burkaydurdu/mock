@@ -1,0 +1,37 @@
+micronaut:
+  io:
+    watch:
+      paths: src/main
+      restart: true
+  application:
+    name: mock
+  executors:
+    consumer:
+      type: fixed
+  security:
+    enabled: true
+  endpoints:
+    routes:
+      enabled: Boolean
+      sensitive: Boolean
+
+datasources:
+  default:
+    url: jdbc:postgresql://localhost:5432/mock
+    driverClassName: org.postgresql.Driver
+    username: bdurdu
+    password: ''
+    schema-generate: CREATE_DROP
+    dialect: POSTGRES
+    logSql: true
+
+jpa:
+  default:
+    entity-scan:
+      packages:
+        - 'com.pow.models'
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true
