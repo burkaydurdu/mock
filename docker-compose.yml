@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  db:
+    image: 'postgres'
+    volumes:
+      - '.data/db:/var/lib/postgresql/data'
+    restart: always
+    environment:
+      - POSTGRES_USER=fake
+      - POSTGRES_PASSWORD=fakepassword
+
+  api:
+    depends_on:
+      - 'db'
+    image: 'mock:latest'
+    ports:
+      - '8080:8080'
+    environment:
+      - DB_URL=jdbc:postgresql://db:5432/mock
+      - DB_USERNAME=fake
+      - DB_PASSWORD=fakepassword

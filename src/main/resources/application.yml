@@ -17,10 +17,10 @@ micronaut:
 
 datasources:
   default:
-    url: jdbc:postgresql://localhost:5432/mock
+    url: ${DB_URL:`jdbc:postgresql://localhost:5432/mock`}
     driverClassName: org.postgresql.Driver
-    username: bdurdu
-    password: ''
+    username: ${DB_USERNAME:`bdurdu`}
+    password: ${DB_PASSWORD:`''`}
     schema-generate: CREATE_DROP
     dialect: POSTGRES
     logSql: true
