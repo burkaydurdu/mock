@@ -65,4 +65,14 @@ open class UsersController {
         currentUser = userService.update(currentUser)
         return HttpResponse.ok(UserDTO(currentUser.id, currentUser.name, currentUser.email))
     }
+
+    @Post("/logout")
+    @Transactional
+    @Secured(SecurityRule.IS_AUTHENTICATED)
+    open fun logout(authentication: Authentication): HttpResponse<*> {
+        val currentUser: User = authentication.attributes["currentUser"] as User
+        currentUser.token = null
+        userService.update(currentUser)
+        return HttpResponse.ok(UserDTO(currentUser.id, currentUser.name, currentUser.email))
+    }
 }

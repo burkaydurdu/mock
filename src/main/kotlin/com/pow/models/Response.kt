@@ -30,10 +30,11 @@ data class Response(
 ): MockEntity()
 
 enum class MimeType {
-    JSON
+    JSON, XML
 }
 
 enum class ResponseMediaType(val type: String) {
-    JSON(MediaType.APPLICATION_JSON)
+    JSON(MediaType.APPLICATION_JSON),
+    XML(MediaType.APPLICATION_XML)
 }
 

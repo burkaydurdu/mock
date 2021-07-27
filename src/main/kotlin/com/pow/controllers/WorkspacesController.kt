@@ -82,4 +82,17 @@ open class WorkspacesController {
             HttpResponse.badRequest(ErrorDTO("Something went wrong!!"))
         }
     }
+
+    @Delete("/{id}")
+    @Transactional
+    @Secured(SecurityRule.IS_AUTHENTICATED)
+    open fun delete(authentication: Authentication, @PathVariable id: UUID): HttpResponse<*> {
+        val currentUser: User = authentication.attributes["currentUser"] as User
+        val workspace: Workspace = workspaceService.findByIdAndUser(id, currentUser)
+            ?: return HttpResponse.notFound(ErrorDTO("Workspace not found!!"))
+
+        workspaceService.deleteIdBy(workspace)
+
+        return HttpResponse.ok(WorkspaceDTO(workspace.id, workspace.name))
+    }
 }

@@ -48,7 +48,6 @@ dependencies {
     testImplementation("org.testcontainers:postgresql")
     testImplementation("org.testcontainers:testcontainers")
     implementation("io.micronaut:micronaut-validation")
-    implementation("io.micronaut.kafka:micronaut-kafka")
     implementation("com.vladmihalcea:hibernate-types-5:2.10.4")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")

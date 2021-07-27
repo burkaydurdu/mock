@@ -11,4 +11,5 @@ interface ResponseRepository: CrudRepository<Response, UUID> {
     fun findByCodeAndRequest(code: Int, request: Request): Response?
     fun save(response: Response): Response
     fun update(response: Response): Response
+    fun deleteIdBy(response: Response)
 }

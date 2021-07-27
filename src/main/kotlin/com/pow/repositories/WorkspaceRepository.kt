@@ -13,4 +13,5 @@ interface WorkspaceRepository: CrudRepository<Workspace, UUID> {
     fun findByNameAndUser(name: String, user: User): Workspace?
     fun save(workspace: Workspace): Workspace
     fun update(workspace: Workspace): Workspace
+    fun deleteIdBy(workspace: Workspace)
 }

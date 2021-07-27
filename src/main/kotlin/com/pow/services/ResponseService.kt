@@ -12,6 +12,8 @@ class ResponseService {
 
     fun findById(id: UUID): Optional<Response> = responseRepository.findById(id)
 
+    fun deleteIdBy(response: Response) = responseRepository.deleteIdBy(response)
+
     fun getResponseList(response: List<Response>): MutableList<ResponseDTO> {
         val responsesDTO: MutableList<ResponseDTO> = mutableListOf()
         response.forEach {

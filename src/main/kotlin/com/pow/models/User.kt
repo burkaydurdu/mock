@@ -23,7 +23,6 @@ data class User(
     @NotNull
     val password: String,
 
-    @NotNull
     @Column(unique = true)
     var token: String? = null,
 

@@ -12,4 +12,5 @@ interface RequestRepository: CrudRepository<Request, UUID> {
     fun findByPathAndMethodAndWorkspace(path: String, method: Method, workspace: Workspace): Request?
     fun save(request: Request): Request
     fun update(request: Request): Request
+    fun deleteIdBy(request: Request)
 }

@@ -104,4 +104,26 @@ open class RequestsController {
             return HttpResponse.notFound(ErrorDTO("No data!!"))
         }
     }
+
+    @Delete("/{id}")
+    @Transactional
+    @Secured(SecurityRule.IS_AUTHENTICATED)
+    open fun delete(authentication: Authentication, @PathVariable id: UUID): HttpResponse<*> {
+        val currentUser: User = authentication.attributes["currentUser"] as User
+        val req = requestService.findById(id)
+
+        return if (req.isPresent) {
+            val workspace = workspaceService.findById(req.get().workspace.id)
+
+            if (workspace.get().user.id == currentUser.id) {
+                requestService.deleteIdBy(req.get())
+
+                HttpResponse.ok(RequestDTO(req.get().id, req.get().path, req.get().method))
+            } else {
+                HttpResponse.badRequest(ErrorDTO("Not found!!"))
+            }
+        } else {
+            HttpResponse.badRequest(ErrorDTO("Not found!!"))
+        }
+    }
 }

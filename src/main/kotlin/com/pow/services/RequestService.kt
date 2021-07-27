@@ -13,6 +13,8 @@ class RequestService {
 
     fun findById(id: UUID): Optional<Request> = requestRepository.findById(id)
 
+    fun deleteIdBy(request: Request) = requestRepository.deleteIdBy(request)
+
     fun getRequestList(requests: List<Request>): MutableList<RequestDTO> {
         val requestsDTO: MutableList<RequestDTO> = mutableListOf()
         requests.forEach {

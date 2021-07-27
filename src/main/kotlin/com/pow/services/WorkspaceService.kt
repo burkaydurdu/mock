@@ -12,6 +12,8 @@ class WorkspaceService {
 
     fun findById(id: UUID): Optional<Workspace> = workspaceRepository.findById(id)
 
+    fun deleteIdBy(workspace: Workspace) = workspaceRepository.deleteIdBy(workspace)
+
     fun findByUser(user: User): List<WorkspaceDTO>? {
         val workspaces: List<Workspace>? = workspaceRepository.findByUser(user)
         val workspaceDTO: MutableList<WorkspaceDTO> = mutableListOf()
