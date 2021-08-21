@@ -1,7 +1,11 @@
 micronaut:
   server:
+    idle-timeout: 30m
     cors:
       enabled: true
+  http:
+    client:
+      read-idle-timeout: 30m
   io:
     watch:
       paths: src/main
