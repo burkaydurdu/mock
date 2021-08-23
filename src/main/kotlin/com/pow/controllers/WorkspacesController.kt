@@ -56,7 +56,13 @@ open class WorkspacesController {
     open fun create(authentication: Authentication, @Body request: WorkspaceCreateRequest): HttpResponse<*> {
         val currentUser: User = authentication.attributes["currentUser"] as User
 
-        Workspace(request.name, currentUser).also {
+        if (request.name.isBlank()) {
+            return HttpResponse.badRequest(ErrorDTO("Something went wrong!!"))
+        }
+
+        val workspaceName = request.name.replace(" ", "-")
+
+        Workspace(workspaceName, currentUser).also {
             val workspace = workspaceService.save(it)
             return if (workspace != null) {
                 HttpResponse.ok(WorkspaceDTO(workspace.id, workspace.name))

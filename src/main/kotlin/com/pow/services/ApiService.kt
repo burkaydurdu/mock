@@ -31,7 +31,7 @@ class ApiService {
         data["body"] = body
         data["header"] = httpRequest.headers
         data["query"] = httpRequest.parameters
-        data["address"] = httpRequest.remoteAddress.toString()
+        data["address"] = httpRequest.serverName
         data["uri"] = httpRequest.uri.toString()
         chatClient.send(data)
         chatClient.close()

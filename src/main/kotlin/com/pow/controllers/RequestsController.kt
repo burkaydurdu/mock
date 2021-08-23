@@ -66,7 +66,14 @@ open class RequestsController {
         val workspace = workspaceService.findById(request.workspaceId)
 
         if (workspace.isPresent && workspace.get().user.id == currentUser.id) {
-            Request(request.path, request.method, workspace.get()).also {
+            if (request.path.isBlank()) {
+                return HttpResponse.badRequest(ErrorDTO("Something went wrong!!"))
+            }
+
+            var requestPath = request.path.replace(" ", "-")
+            requestPath = requestPath.dropWhile { it == '/' }
+
+            Request(requestPath, request.method, workspace.get()).also {
                 val req = requestService.save(it)
 
                 return if (req != null) {
@@ -94,7 +101,10 @@ open class RequestsController {
                 return HttpResponse.badRequest(ErrorDTO("Something went wrong!!"))
             }
 
-            val updatedRequest = requestService.update(req.get(), request.path, request.method)
+            var requestPath = request.path.replace(" ", "-")
+            requestPath = requestPath.dropWhile { it == '/' }
+
+            val updatedRequest = requestService.update(req.get(), requestPath, request.method)
             return if (updatedRequest != null) {
                 HttpResponse.ok(RequestDTO(updatedRequest.id, updatedRequest.path, updatedRequest.method))
             } else {

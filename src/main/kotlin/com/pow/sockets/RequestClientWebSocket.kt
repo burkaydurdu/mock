@@ -18,13 +18,10 @@ abstract class RequestClientWebSocket : AutoCloseable {
     }
 
     @OnMessage
-    fun onMessage(message: String) {
-    }
+    fun onMessage(message: String) {}
 
     @OnClose
-    fun onClose() {
-
-    }
+    fun onClose() {}
 
     abstract fun send(message: HashMap<String, Any?>)
 }
