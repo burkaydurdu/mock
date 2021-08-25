@@ -95,7 +95,12 @@ open class ResponsesController {
                 return HttpResponse.badRequest(ErrorDTO("Access denied!!"))
             }
 
-            val updatedResponse = responseService.update(response.get(), request.headers, request.body, request.mimeType)
+            val updatedResponse = responseService.update(response.get(),
+                                                         request.headers,
+                                                         request.body,
+                                                         request.mimeType,
+                                                         request.code)
+
             return if (updatedResponse != null) {
                 HttpResponse.ok(ResponseDTO(updatedResponse.id,
                                             updatedResponse.headers,

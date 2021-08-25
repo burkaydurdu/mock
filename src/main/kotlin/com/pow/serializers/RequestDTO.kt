@@ -5,4 +5,5 @@ import java.util.*
 
 data class RequestDTO(var id: UUID,
                       var path: String,
-                      var method: Method)
+                      var method: Method,
+                      var workspaceId: UUID)

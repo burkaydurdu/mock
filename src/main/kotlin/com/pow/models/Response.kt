@@ -22,7 +22,7 @@ data class Response(
     var mimeType: MimeType,
 
     @NotNull
-    val code: Int,
+    var code: Int,
 
     @NotNull
     @ManyToOne

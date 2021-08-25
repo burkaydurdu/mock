@@ -28,10 +28,15 @@ class ResponseService {
         return null
     }
 
-    fun update(response: Response, headers: Map<String, Any>, body: String, mimeType: MimeType): Response? {
+    fun update(response: Response, headers: Map<String, Any>, body: String?, mimeType: MimeType, code: Int): Response? {
+        if (response.code != code && responseRepository.findByCodeAndRequest(code, response.request) != null) {
+            return null
+        }
+
         response.headers = headers
         response.body = body
         response.mimeType = mimeType
+        response.code = code
         return response
     }
 }

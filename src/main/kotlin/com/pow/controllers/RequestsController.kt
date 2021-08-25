@@ -35,7 +35,7 @@ open class RequestsController {
             val workspace = workspaceService.findById(req.get().workspace.id)
 
             if (workspace.get().user.id == currentUser.id) {
-                HttpResponse.ok(RequestDTO(req.get().id, req.get().path, req.get().method))
+                HttpResponse.ok(RequestDTO(req.get().id, req.get().path, req.get().method, req.get().workspace.id))
             } else {
                 HttpResponse.badRequest(ErrorDTO("Not found!!"))
             }
@@ -77,7 +77,7 @@ open class RequestsController {
                 val req = requestService.save(it)
 
                 return if (req != null) {
-                    HttpResponse.ok(RequestDTO(req.id, req.path, req.method))
+                    HttpResponse.ok(RequestDTO(req.id, req.path, req.method, req.workspace.id))
                 } else {
                     HttpResponse.badRequest(ErrorDTO("Something went wrong!!"))
                 }
@@ -106,7 +106,10 @@ open class RequestsController {
 
             val updatedRequest = requestService.update(req.get(), requestPath, request.method)
             return if (updatedRequest != null) {
-                HttpResponse.ok(RequestDTO(updatedRequest.id, updatedRequest.path, updatedRequest.method))
+                HttpResponse.ok(RequestDTO(updatedRequest.id,
+                                           updatedRequest.path,
+                                           updatedRequest.method,
+                                           updatedRequest.workspace.id))
             } else {
                 HttpResponse.badRequest(ErrorDTO("Something went wrong!!"))
             }
@@ -128,7 +131,7 @@ open class RequestsController {
             if (workspace.get().user.id == currentUser.id) {
                 requestService.deleteIdBy(req.get())
 
-                HttpResponse.ok(RequestDTO(req.get().id, req.get().path, req.get().method))
+                HttpResponse.ok(RequestDTO(req.get().id, req.get().path, req.get().method, req.get().workspace.id))
             } else {
                 HttpResponse.badRequest(ErrorDTO("Not found!!"))
             }

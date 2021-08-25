@@ -18,7 +18,7 @@ class RequestService {
     fun getRequestList(requests: List<Request>): MutableList<RequestDTO> {
         val requestsDTO: MutableList<RequestDTO> = mutableListOf()
         requests.forEach {
-            requestsDTO.add(RequestDTO(it.id, it.path, it.method))
+            requestsDTO.add(RequestDTO(it.id, it.path, it.method, it.workspace.id))
         }
         return requestsDTO
     }
