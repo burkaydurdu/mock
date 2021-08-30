@@ -3,6 +3,13 @@ micronaut:
     idle-timeout: 30m
     cors:
       enabled: true
+    netty:
+      worker:
+        event-loop-group: other
+  netty:
+    event-loops:
+      other:
+        num-threads: 10
   http:
     client:
       read-idle-timeout: 30m
@@ -13,6 +20,9 @@ micronaut:
   application:
     name: mock
   executors:
+    io:
+      type: fixed
+      n-threads: 75
     consumer:
       type: fixed
   security:

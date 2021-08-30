@@ -2,10 +2,7 @@ package com.pow.sockets
 
 import io.micronaut.http.HttpRequest
 import io.micronaut.websocket.WebSocketSession
-import io.micronaut.websocket.annotation.ClientWebSocket
-import io.micronaut.websocket.annotation.OnClose
-import io.micronaut.websocket.annotation.OnMessage
-import io.micronaut.websocket.annotation.OnOpen
+import io.micronaut.websocket.annotation.*
 
 @ClientWebSocket("/request/{userId}/{workspaceId}/{requestId}")
 abstract class RequestClientWebSocket : AutoCloseable {
@@ -21,7 +18,7 @@ abstract class RequestClientWebSocket : AutoCloseable {
     fun onMessage(message: String) {}
 
     @OnClose
-    fun onClose() {}
+    fun onClose(session: WebSocketSession) {}
 
     abstract fun send(message: HashMap<String, Any?>)
 }
