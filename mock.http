@@ -1,0 +1,12 @@
+###
+GET http://localhost:8080/
+
+###
+POST http://localhost:8080/users/sign-up
+Content-Type: application/json
+
+{
+  "name": "Pinokyo",
+  "email": "pinokyo@puppetapi.com",
+  "password": "LieLieLie.911"
+}
