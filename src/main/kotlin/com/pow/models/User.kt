@@ -3,7 +3,6 @@ package com.pow.models
 import com.fasterxml.jackson.annotation.JsonIgnore
 import com.vladmihalcea.hibernate.type.array.ListArrayType
 import org.hibernate.annotations.TypeDef
-import java.util.*
 import javax.persistence.*
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotNull

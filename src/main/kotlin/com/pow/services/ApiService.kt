@@ -24,15 +24,18 @@ class ApiService {
                            requestId: UUID,
                            body: HashMap<String, Any>?,
                            httpRequest: HttpRequest<*>) {
+
         val chatClient: RequestClientWebSocket = webSocketClient
             .connect(RequestClientWebSocket::class.java, "/request/${userId}/${workspaceId}/${requestId}")
             .blockingFirst()
+
         val data: HashMap<String, Any?> = hashMapOf();
         data["body"] = body
         data["header"] = httpRequest.headers
         data["query"] = httpRequest.parameters
         data["address"] = httpRequest.serverName
         data["uri"] = httpRequest.uri.toString()
+
         chatClient.send(data)
         chatClient.close()
     }

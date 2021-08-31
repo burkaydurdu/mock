@@ -1,6 +1,5 @@
 package com.pow.auths
 
-import com.pow.repositories.UserRepository
 import com.pow.services.UserService
 import io.micronaut.http.HttpRequest
 import io.micronaut.security.authentication.Authentication

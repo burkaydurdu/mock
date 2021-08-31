@@ -12,6 +12,6 @@ open class ApplicationController {
     @Get("/")
     @Secured(SecurityRule.IS_ANONYMOUS)
     open fun index(): HttpResponse<String> {
-        return HttpResponse.ok("Simple Mock API")
+        return HttpResponse.ok("Puppet API")
     }
 }
