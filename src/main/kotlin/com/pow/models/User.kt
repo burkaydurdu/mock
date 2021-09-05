@@ -27,5 +27,8 @@ data class User(
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
     @JsonIgnore
-    var workspaces: List<Workspace>? = null
+    var workspaces: List<Workspace>? = null,
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = [CascadeType.ALL], orphanRemoval = true)
+    var forgotAuthToken: ForgotAuthToken? = null
 ): MockEntity()
