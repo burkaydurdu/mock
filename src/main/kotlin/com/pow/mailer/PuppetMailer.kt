@@ -43,6 +43,6 @@ class PuppetMailer(config: SmtpConfig) : PuppetMail {
     }
 
     override fun resetPasswordTemplate(securityToken: String) {
-        template = "<a href='${domain}/reset_password/${securityToken}'>Reset Password</a>"
+        template = "<a href='${domain}/reset-password?hash=${securityToken}'>Reset Password</a>"
     }
 }

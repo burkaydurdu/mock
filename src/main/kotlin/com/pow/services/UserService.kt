@@ -7,6 +7,7 @@ import com.pow.models.User
 import com.pow.repositories.ForgotAuthTokenRepository
 import com.pow.repositories.UserRepository
 import com.pow.utils.Utils
+import java.time.LocalDateTime
 import java.util.*
 import javax.inject.Inject
 
@@ -22,6 +23,17 @@ class UserService {
     fun findByEmailAndPassword(email: String, password: String) = userRepository.findByEmailAndPassword(email, password)
 
     fun findByEmail(email: String) = userRepository.findByEmail(email)
+
+    fun updatePasswordWithForgotAuthToken(password: String, token: String) : User? {
+        val forgotAuthToken = forgotAuthTokenRepository.findByToken(token) ?: return null
+        val user = forgotAuthToken.user
+
+        user.password = Utils.getGeneratedPasswordHash(password)
+        // [TODO] Should be changed this logic.
+        forgotAuthToken.token = Utils.generateKey(32)
+
+        return user
+    }
 
     fun save(user: User): User? {
         userRepository.findByEmail(user.email) ?: return userRepository.save(user)

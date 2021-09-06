@@ -20,7 +20,7 @@ data class User(
     val email: String,
 
     @NotNull
-    val password: String,
+    var password: String,
 
     @Column(unique = true)
     var token: String? = null,

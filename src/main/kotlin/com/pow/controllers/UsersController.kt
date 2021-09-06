@@ -1,10 +1,7 @@
 package com.pow.controllers
 
 import com.pow.models.User
-import com.pow.requests.SendResetPasswordRequest
-import com.pow.requests.SignUpRequest
-import com.pow.requests.SingInRequest
-import com.pow.requests.UserUpdateRequest
+import com.pow.requests.*
 import com.pow.serializers.ErrorDTO
 import com.pow.serializers.UserDTO
 import com.pow.services.UserService
@@ -86,6 +83,16 @@ open class UsersController {
 
         userService.sendResetPasswordEmail(currentUser)
 
-        return HttpResponse.ok(null)
+        return HttpResponse.ok(emptyMap<String, String>())
+    }
+
+    @Post("/reset_password")
+    @Transactional
+    @Secured(SecurityRule.IS_ANONYMOUS)
+    open fun resetPassword(@Body request: ResetPasswordRequest): HttpResponse<*> {
+        userService.updatePasswordWithForgotAuthToken(request.password, request.hash)
+            ?: return HttpResponse.notFound(ErrorDTO("User not found"))
+
+        return HttpResponse.ok(emptyMap<String, String>())
     }
 }

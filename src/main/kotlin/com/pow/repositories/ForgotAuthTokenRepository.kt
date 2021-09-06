@@ -8,4 +8,5 @@ import java.util.*
 @Repository
 interface ForgotAuthTokenRepository: CrudRepository<ForgotAuthToken, UUID> {
     fun save(forgotAuthToken: ForgotAuthToken): ForgotAuthToken
+    fun findByToken(token: String) : ForgotAuthToken?
 }
